@@ -1,0 +1,35 @@
+ALL_AAS_EXCEPT_E = 'ACDFGHIKLMNPQRSTVWY'
+ALL_AAS_EXCEPT_PE = 'ACDFGHIKLMNQRSTVWY'
+DEBUG_MODE = False
+
+#Choice of file name decides whether to weight dominant gluten peptides stronger
+PEPTIDES_FN = "peptides.csv"
+#PEPTIDES_FN = "peptides_enriched_dominant.csv"
+
+#To allow non-observed peptides also
+PSEUDO_COUNTS = 0.5
+
+#How many peptides to draw from the mixed model in estimating their frequency
+DEPTH = 10000
+OUT_FOLDER = "Output"
+#OUT_FOLDER = 'Uniform_peptide_weighting'
+#OUT_FOLDER = 'Enriched_immunodominant'
+
+queries = [line.split("\t")[0] for line in """PFPQPQQQLPQPQ	P2369
+PFPQPQQPYPQPQ	P2368
+PYPQPQQPFPQPQ	P2367
+PYPQPQPQYPQPQ	P2366
+SFPQPQPQQPQQP	P2365
+PFPQPQLQFPQQP	P2364
+PFPQPQLPFPQQS	P2363
+QQPFPQQPYPQQP	P2362
+LQPFPQPQQPYPQ	P2361
+QQPFPQPQQPQQP	P2360
+QQPFPQPQLPFPQ	P2359
+QQPFPQLQQPQQP	P2358
+PFPQPQQPFPLRP	P2370
+QPQQPQLPFPQQP	P2371
+QQQFPQPQQPQQS	P2372
+QFPQPQQPQQQFP	P2373
+PFPQPQLPYSQPQ	P2374
+QFIQPQQPFPQQP	P2375""".split("\n")]
