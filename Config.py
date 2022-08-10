@@ -10,10 +10,12 @@ PEPTIDES_FN = "peptides.csv"
 PSEUDO_COUNTS = 0.5
 
 #How many peptides to draw from the mixed model in estimating their frequency
-DEPTH = 10000
+MC_SAMPLING_DEPTH = 50000000
 OUT_FOLDER = "Output"
 #OUT_FOLDER = 'Uniform_peptide_weighting'
 #OUT_FOLDER = 'Enriched_immunodominant'
+NUM_DB_PRESENT_PEPTIDES_TO_KEEP = 1000
+NUM_NON_FILTERED_PEPTIDES_TO_WRITE = 1000
 
 queries = [line.split("\t")[0] for line in """PFPQPQQQLPQPQ	P2369
 PFPQPQQPYPQPQ	P2368

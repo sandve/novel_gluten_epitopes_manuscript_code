@@ -2,7 +2,7 @@ from random import random
 from re import finditer
 from collections import defaultdict
 
-from Config import PEPTIDES_FN, PSEUDO_COUNTS, DEPTH
+from Config import PEPTIDES_FN, PSEUDO_COUNTS, MC_SAMPLING_DEPTH
 from Peptide import Peptide
 
 
@@ -40,14 +40,14 @@ def getOutputFile(fn):
     outFile = open(fn,'w')
     outFile.write("Pseudo-count: " + f'{PSEUDO_COUNTS:.2f}' +'\n')
     outFile.write("Peptides: " + PEPTIDES_FN + '\n')
-    outFile.write("Simulation depth: " + str(DEPTH) + '\n')
+    outFile.write("Simulation depth: " + str(MC_SAMPLING_DEPTH) + '\n')
     outFile.write("spm means seq per million (estimated probability times a million)\n")
     return outFile
 
 
 def get_sampled_seq_counts(mm):
     sampledSeqCounts = defaultdict(int)
-    for i in range(DEPTH):
+    for i in range(MC_SAMPLING_DEPTH):
         sampledSeqCounts[mm.sample()] += 1
     sortedSampledSeqCounts = sorted(sampledSeqCounts.items(), key=lambda x: x[1], reverse=True)
     return sortedSampledSeqCounts
@@ -60,11 +60,19 @@ def modify_to_non_deaminated_version(sortedSampledSeqCounts):
             sl[3] = "Q"
             sortedSampledSeqCounts[i] = list(sortedSampledSeqCounts[i])
             sortedSampledSeqCounts[i][0] = "".join(sl)
+            sortedSampledSeqCounts[i] = tuple(sortedSampledSeqCounts[i])
         if s[5] == "E":
             sl = list(sortedSampledSeqCounts[i][0])
             sl[5] = "Q"
             sortedSampledSeqCounts[i] = list(sortedSampledSeqCounts[i])
             sortedSampledSeqCounts[i][0] = "".join(sl)
+            sortedSampledSeqCounts[i] = tuple(sortedSampledSeqCounts[i])
+
+    sampleSeqCountDict = defaultdict(int)
+    for s, c in sortedSampledSeqCounts:
+        sampleSeqCountDict[s] += c
+    sortedMergedIfBecomeEqualSampledSeqCounts = sorted(sampleSeqCountDict.items(), key=lambda x: x[1], reverse=True)
+    return sortedMergedIfBecomeEqualSampledSeqCounts
 
 
 def read_peptides():

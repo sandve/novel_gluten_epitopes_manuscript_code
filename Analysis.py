@@ -13,7 +13,7 @@ def main():
     sortedSampledSeqCounts = get_sampled_seq_counts(mm)
     write_unfiltered(sortedSampledSeqCounts)
 
-    modify_to_non_deaminated_version(sortedSampledSeqCounts)
+    sortedSampledSeqCounts = modify_to_non_deaminated_version(sortedSampledSeqCounts)
     write_nondeamed_version(sortedSampledSeqCounts)
 
     spm_times_hits = count_db_hits_and_write_filtered(sortedSampledSeqCounts)
