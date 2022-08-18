@@ -3,8 +3,8 @@ ALL_AAS_EXCEPT_PE = 'ACDFGHIKLMNQRSTVWY'
 DEBUG_MODE = False
 
 #Choice of file name decides whether to weight dominant gluten peptides stronger
-PEPTIDES_FN = "peptides.csv"
-#PEPTIDES_FN = "peptides_enriched_dominant.csv"
+#PEPTIDES_FN = "peptides.csv"
+PEPTIDES_FN = "peptides_enriched_dominant.csv"
 
 #To allow non-observed peptides also
 PSEUDO_COUNTS = 0.5

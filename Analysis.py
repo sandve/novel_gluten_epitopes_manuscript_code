@@ -1,4 +1,5 @@
 
+import time
 from FileWritingUtilFuncs import write_filterered_sorted_by_hit_multiplication, count_db_hits_and_write_filtered, \
     write_nondeamed_version, write_unfiltered
 from Peptide_models import PosFreqCounter, FullSeqModel, MixedModel, setup_models
@@ -20,9 +21,9 @@ def main():
 
     write_filterered_sorted_by_hit_multiplication(spm_times_hits)
 
-
+start_time = time.time()
 main()
-
+print(f"Runtime: {time.time()-start_time:.1f} seconds")
 #extended = extend_seqs([x.strip() for x in open("seqs_to_extend.txt").readlines()], getSeqListFromFasta("Complete_database.fasta"),2)
 #write_extensions(extended, "extended_seqs.txt")
 #check_alpha_gamma(queries, "Complete_database.fasta")

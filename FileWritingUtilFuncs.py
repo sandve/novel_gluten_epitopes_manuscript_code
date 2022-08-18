@@ -3,7 +3,6 @@ from util_functions import getOutputFile, getSeqListFromFasta
 
 def write_filterered_sorted_by_hit_multiplication(spm_times_hits):
     outFfilteredManyHits = getOutputFile(OUT_FOLDER + "/filtered_samples_multiply_by_hits.csv")
-    print("TEMP2: ", len(spm_times_hits))
     spm_items = spm_times_hits.items()
     sorted_spm_items = sorted(spm_items, key=lambda x: x[1], reverse=True)
     for pep, spm in sorted_spm_items:
@@ -29,7 +28,6 @@ def count_db_hits_and_write_filtered(sortedSampledSeqCounts):
                 print("Stopping at configured sufficient number of db hits: ", NUM_DB_PRESENT_PEPTIDES_TO_KEEP)
                 break
     outFfiltered.close()
-    print("TEMP1: ", foundSeqs, len(spm_times_hits))
     return spm_times_hits
 
 
